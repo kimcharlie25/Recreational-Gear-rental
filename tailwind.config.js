@@ -4,6 +4,20 @@ export default {
   theme: {
     extend: {
       colors: {
+        primary: {
+          50: '#f0fdf4',
+          100: '#dcfce7',
+          200: '#bbf7d0',
+          300: '#86efac',
+          400: '#4ade80',
+          500: '#22c55e',
+          600: '#16a34a',
+          700: '#15803d',
+          800: '#166534',
+          900: '#14532d',
+          DEFAULT: '#043f13',
+        },
+        secondary: '#000000',
         red: {
           50: '#fef2f2',
           100: '#fee2e2',
@@ -30,8 +44,9 @@ export default {
         }
       },
       fontFamily: {
+        'sans': ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
         'inter': ['Inter', 'sans-serif'],
-        'noto': ['Noto Serif', 'serif']
+        'noto': ['Inter', 'sans-serif'] // Overriding noto to sans-serif as requested
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',

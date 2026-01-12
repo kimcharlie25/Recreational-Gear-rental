@@ -3,44 +3,33 @@
 @tailwind utilities;
 
 /* ClickEats Custom Styles */
-.bg-cream-50 {
-  background-color: #fefce8;
+body {
+  background-color: #ffffff;
+  color: #000000;
 }
 
-.bg-cream-100 {
-  background-color: #fef3c7;
+.bg-primary-50 {
+  background-color: #f0fdf4;
 }
 
-.bg-cream-200 {
-  background-color: #fde68a;
+.text-primary {
+  color: #043f13;
 }
 
-.border-cream-200 {
-  border-color: #fde68a;
+.bg-primary {
+  background-color: #043f13;
 }
 
-.border-cream-300 {
-  border-color: #fcd34d;
+.border-primary {
+  border-color: #043f13;
 }
 
-.hover\:bg-cream-50:hover {
-  background-color: #fefce8;
+.hover\:bg-primary:hover {
+  background-color: #043f13;
 }
 
-.hover\:bg-cream-100:hover {
-  background-color: #fef3c7;
-}
-
-.hover\:bg-cream-200:hover {
-  background-color: #fde68a;
-}
-
-.hover\:border-cream-400:hover {
-  border-color: #fbbf24;
-}
-
-.focus\:ring-cream-500:focus {
-  --tw-ring-color: #f59e0b;
+.focus\:ring-primary:focus {
+  --tw-ring-color: #043f13;
 }
 
 /* Hide scrollbar for mobile nav */

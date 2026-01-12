@@ -61,6 +61,8 @@ export interface OrderData {
   total: number;
   notes?: string;
   receiptUrl?: string;
+  renterIdUrl?: string;
+  rentalStartDate?: string;
 }
 
 export type PaymentMethod = 'gcash' | 'maya' | 'bank-transfer';

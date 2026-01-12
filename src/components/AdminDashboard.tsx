@@ -127,10 +127,10 @@ const AdminDashboard: React.FC = () => {
       const item = menuItems.find(i => i.id === id);
       return item ? item.name : 'Unknown Item';
     }).slice(0, 5); // Show first 5 items
-    
+
     const displayNames = itemNames.join(', ');
     const moreItems = selectedItems.length > 5 ? ` and ${selectedItems.length - 5} more items` : '';
-    
+
     if (confirm(`Are you sure you want to delete ${selectedItems.length} item(s)?\n\nItems to delete: ${displayNames}${moreItems}\n\nThis action cannot be undone.`)) {
       try {
         setIsProcessing(true);
@@ -177,8 +177,8 @@ const AdminDashboard: React.FC = () => {
   };
 
   const handleSelectItem = (itemId: string) => {
-    setSelectedItems(prev => 
-      prev.includes(itemId) 
+    setSelectedItems(prev =>
+      prev.includes(itemId)
         ? prev.filter(id => id !== itemId)
         : [...prev, itemId]
     );
@@ -641,7 +641,7 @@ const AdminDashboard: React.FC = () => {
                   <h3 className="text-lg font-medium text-black mb-1">Bulk Actions</h3>
                   <p className="text-sm text-gray-600">{selectedItems.length} item(s) selected</p>
                 </div>
-                
+
                 <div className="flex flex-col sm:flex-row gap-3">
                   {/* Change Category */}
                   <div className="flex items-center space-x-2">
@@ -662,7 +662,7 @@ const AdminDashboard: React.FC = () => {
                       ))}
                     </select>
                   </div>
-                  
+
                   {/* Remove Items */}
                   <button
                     onClick={handleBulkRemove}
@@ -672,7 +672,7 @@ const AdminDashboard: React.FC = () => {
                     <Trash2 className="h-4 w-4" />
                     <span>{isProcessing ? 'Removing...' : 'Remove Selected'}</span>
                   </button>
-                  
+
                   {/* Clear Selection */}
                   <button
                     onClick={() => {
@@ -786,11 +786,10 @@ const AdminDashboard: React.FC = () => {
                               Popular
                             </span>
                           )}
-                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                            item.available 
-                              ? 'bg-green-100 text-green-800' 
+                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${item.available
+                              ? 'bg-green-100 text-green-800'
                               : 'bg-red-100 text-red-800'
-                          }`}>
+                            }`}>
                             {item.available ? 'Available' : 'Unavailable'}
                           </span>
                         </div>
@@ -850,14 +849,14 @@ const AdminDashboard: React.FC = () => {
                       </button>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex-1 min-w-0">
                       <h3 className="font-medium text-gray-900 truncate">{item.name}</h3>
                       <p className="text-sm text-gray-500 mt-1 line-clamp-2">{item.description}</p>
                     </div>
                   </div>
-                  
+
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
                       <span className="text-gray-500">Category:</span>
@@ -887,7 +886,7 @@ const AdminDashboard: React.FC = () => {
                       <span className="ml-1 text-gray-900">{item.addOns?.length || 0}</span>
                     </div>
                   </div>
-                  
+
                   <div className="flex items-center justify-between mt-3">
                     <div className="flex items-center space-x-2">
                       {item.popular && (
@@ -895,11 +894,10 @@ const AdminDashboard: React.FC = () => {
                           Popular
                         </span>
                       )}
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        item.available 
-                          ? 'bg-green-100 text-green-800' 
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${item.available
+                          ? 'bg-green-100 text-green-800'
                           : 'bg-red-100 text-red-800'
-                      }`}>
+                        }`}>
                         {item.available ? 'Available' : 'Unavailable'}
                       </span>
                     </div>
@@ -980,7 +978,7 @@ const AdminDashboard: React.FC = () => {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
               <Coffee className="h-8 w-8 text-black" />
-              <h1 className="text-2xl font-noto font-semibold text-black">ClickEats Admin</h1>
+              <h1 className="text-2xl font-noto font-semibold text-black">Recreational Gear rental Admin</h1>
             </div>
             <div className="flex items-center space-x-4">
               <a

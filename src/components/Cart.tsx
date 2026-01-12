@@ -23,16 +23,16 @@ const Cart: React.FC<CartProps> = ({
 }) => {
   if (cartItems.length === 0) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-12">
-        <div className="text-center py-16">
-          <div className="text-6xl mb-4">☕</div>
-          <h2 className="text-2xl font-playfair font-medium text-black mb-2">Your cart is empty</h2>
-          <p className="text-gray-600 mb-6">Add some delicious items to get started!</p>
+      <div className="max-w-4xl mx-auto px-4 py-24">
+        <div className="text-center py-20 bg-gray-50 border border-secondary/5">
+          <div className="text-8xl mb-8 opacity-20 grayscale">📦</div>
+          <h2 className="text-4xl font-black text-secondary mb-4 uppercase tracking-tight">Your Gear Bag is Empty</h2>
+          <p className="text-gray-500 mb-10 font-medium">Ready for your next adventure? Browse our premium equipment.</p>
           <button
             onClick={onContinueShopping}
-            className="bg-red-600 text-white px-6 py-3 rounded-full hover:bg-red-700 transition-all duration-200"
+            className="bg-primary text-white px-12 py-5 font-black uppercase tracking-widest hover:bg-secondary transition-all duration-500 shadow-xl"
           >
-            Browse Menu
+            Explore Equipment
           </button>
         </div>
       </div>
@@ -40,78 +40,82 @@ const Cart: React.FC<CartProps> = ({
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="max-w-4xl mx-auto px-4 py-16">
       {/* Header Section */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-4">
-        <button
-          onClick={onContinueShopping}
-          className="flex items-center space-x-2 text-gray-600 hover:text-black transition-colors duration-200 self-start"
-        >
-          <ArrowLeft className="h-5 w-5" />
-          <span className="hidden sm:inline">Continue Shopping</span>
-          <span className="sm:hidden">Back</span>
-        </button>
-        
-        <div className="flex items-center justify-between sm:justify-center flex-1">
-          <h1 className="text-2xl sm:text-3xl font-noto font-semibold text-black">Your Cart</h1>
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-12 gap-6 border-b-4 border-secondary pb-8">
+        <div>
+          <h1 className="text-5xl font-black text-secondary uppercase tracking-tighter">Your Bag</h1>
+          <p className="text-primary font-black uppercase tracking-widest text-[10px] mt-2">Reserved Premium Equipment</p>
+        </div>
+
+        <div className="flex items-center space-x-8">
+          <button
+            onClick={onContinueShopping}
+            className="group flex items-center space-x-2 text-secondary font-black uppercase tracking-widest text-[10px] hover:text-primary transition-colors"
+          >
+            <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+            <span>Continue Shopping</span>
+          </button>
+
           <button
             onClick={clearCart}
-            className="text-red-500 hover:text-red-600 transition-colors duration-200 text-sm sm:text-base"
+            className="text-gray-400 hover:text-red-600 font-black uppercase tracking-widest text-[10px] transition-colors"
           >
-            Clear All
+            Empty Bag
           </button>
         </div>
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm overflow-hidden mb-8">
+      <div className="bg-white border border-secondary/10 mb-12">
         {cartItems.map((item, index) => (
-          <div key={item.id} className={`p-4 sm:p-6 ${index !== cartItems.length - 1 ? 'border-b border-cream-200' : ''}`}>
+          <div key={item.id} className={`p-8 sm:p-10 ${index !== cartItems.length - 1 ? 'border-b border-secondary/10' : ''}`}>
             {/* Mobile Layout */}
             <div className="block sm:hidden">
-              <div className="flex justify-between items-start mb-3">
-                <div className="flex-1 pr-3">
-                  <h3 className="text-base font-noto font-medium text-black mb-1">{item.name}</h3>
+              <div className="flex justify-between items-start mb-6">
+                <div className="flex-1 pr-4">
+                  <h3 className="text-xl font-black text-secondary uppercase tracking-tight mb-2">{item.name}</h3>
                   {item.selectedVariation && (
-                    <p className="text-xs text-gray-500 mb-1">Size: {item.selectedVariation.name}</p>
+                    <span className="inline-block bg-primary/10 text-primary text-[10px] font-black uppercase px-2 py-1 tracking-widest mb-2 mr-2">
+                      {item.selectedVariation.name}
+                    </span>
                   )}
                   {item.selectedAddOns && item.selectedAddOns.length > 0 && (
-                    <p className="text-xs text-gray-500 mb-1">
-                      Add-ons: {item.selectedAddOns.map(addOn => 
-                        addOn.quantity && addOn.quantity > 1 
-                          ? `${addOn.name} x${addOn.quantity}`
-                          : addOn.name
-                      ).join(', ')}
-                    </p>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {item.selectedAddOns.map((addOn, i) => (
+                        <span key={i} className="text-[10px] font-bold text-gray-500 uppercase border border-gray-200 px-2 py-0.5">
+                          {addOn.quantity && addOn.quantity > 1 ? `${addOn.name} x${addOn.quantity}` : addOn.name}
+                        </span>
+                      ))}
+                    </div>
                   )}
                 </div>
                 <button
                   onClick={() => removeFromCart(item.id)}
-                  className="p-1 text-red-500 hover:text-red-600 hover:bg-red-50 rounded-full transition-all duration-200"
+                  className="p-2 text-gray-300 hover:text-red-600 transition-colors"
                 >
-                  <Trash2 className="h-4 w-4" />
+                  <Trash2 className="h-5 w-5" />
                 </button>
               </div>
-              
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2 bg-yellow-100 rounded-full p-1">
+
+              <div className="flex items-center justify-between mt-8">
+                <div className="flex items-center bg-secondary text-white p-1">
                   <button
                     onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                    className="p-2 hover:bg-yellow-200 rounded-full transition-colors duration-200"
+                    className="p-2 hover:bg-primary transition-colors"
                   >
-                    <Minus className="h-3 w-3" />
+                    <Minus className="h-4 w-4" />
                   </button>
-                  <span className="font-semibold text-black min-w-[24px] text-center text-sm">{item.quantity}</span>
+                  <span className="font-black w-8 text-center text-lg">{item.quantity}</span>
                   <button
                     onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                    className="p-2 hover:bg-yellow-200 rounded-full transition-colors duration-200"
+                    className="p-2 hover:bg-primary transition-colors"
                   >
-                    <Plus className="h-3 w-3" />
+                    <Plus className="h-4 w-4" />
                   </button>
                 </div>
-                
+
                 <div className="text-right">
-                  <p className="text-sm text-gray-500">₱{item.totalPrice} each</p>
-                  <p className="text-lg font-semibold text-black">₱{item.totalPrice * item.quantity}</p>
+                  <p className="text-2xl font-black text-secondary">₱{(item.totalPrice * item.quantity).toLocaleString()}</p>
                 </div>
               </div>
             </div>
@@ -119,48 +123,57 @@ const Cart: React.FC<CartProps> = ({
             {/* Desktop Layout */}
             <div className="hidden sm:flex items-center justify-between">
               <div className="flex-1">
-                <h3 className="text-lg font-noto font-medium text-black mb-1">{item.name}</h3>
-                {item.selectedVariation && (
-                  <p className="text-sm text-gray-500 mb-1">Size: {item.selectedVariation.name}</p>
-                )}
-                {item.selectedAddOns && item.selectedAddOns.length > 0 && (
-                  <p className="text-sm text-gray-500 mb-1">
-                    Add-ons: {item.selectedAddOns.map(addOn => 
-                      addOn.quantity && addOn.quantity > 1 
-                        ? `${addOn.name} x${addOn.quantity}`
-                        : addOn.name
-                    ).join(', ')}
-                  </p>
-                )}
-                <p className="text-lg font-semibold text-black">₱{item.totalPrice} each</p>
+                <h3 className="text-2xl font-black text-secondary uppercase tracking-tight mb-2">{item.name}</h3>
+                <div className="flex items-center gap-3">
+                  {item.selectedVariation && (
+                    <span className="bg-primary text-white text-[10px] font-black uppercase px-3 py-1 tracking-widest">
+                      {item.selectedVariation.name}
+                    </span>
+                  )}
+                  {item.selectedAddOns && item.selectedAddOns.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {item.selectedAddOns.map((addOn, i) => (
+                        <span key={i} className="text-[10px] font-bold text-gray-500 uppercase border border-gray-200 px-3 py-1">
+                          {addOn.quantity && addOn.quantity > 1 ? `${addOn.name} x${addOn.quantity}` : addOn.name}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
-              
-              <div className="flex items-center space-x-4 ml-4">
-                <div className="flex items-center space-x-3 bg-yellow-100 rounded-full p-1">
+
+              <div className="flex items-center space-x-12">
+                <div className="text-right min-w-[120px]">
+                  <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Unit Price</p>
+                  <p className="text-xl font-bold text-secondary">₱{item.totalPrice.toLocaleString()}</p>
+                </div>
+
+                <div className="flex items-center bg-secondary text-white p-1">
                   <button
                     onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                    className="p-2 hover:bg-yellow-200 rounded-full transition-colors duration-200"
+                    className="p-3 hover:bg-primary transition-colors"
                   >
                     <Minus className="h-4 w-4" />
                   </button>
-                  <span className="font-semibold text-black min-w-[32px] text-center">{item.quantity}</span>
+                  <span className="font-black w-10 text-center text-xl">{item.quantity}</span>
                   <button
                     onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                    className="p-2 hover:bg-yellow-200 rounded-full transition-colors duration-200"
+                    className="p-3 hover:bg-primary transition-colors"
                   >
                     <Plus className="h-4 w-4" />
                   </button>
                 </div>
-                
-                <div className="text-right">
-                  <p className="text-lg font-semibold text-black">₱{item.totalPrice * item.quantity}</p>
+
+                <div className="text-right min-w-[150px]">
+                  <p className="text-[10px] font-black text-primary uppercase tracking-widest mb-1">Subtotal</p>
+                  <p className="text-3xl font-black text-secondary">₱{(item.totalPrice * item.quantity).toLocaleString()}</p>
                 </div>
-                
+
                 <button
                   onClick={() => removeFromCart(item.id)}
-                  className="p-2 text-red-500 hover:text-red-600 hover:bg-red-50 rounded-full transition-all duration-200"
+                  className="p-3 text-gray-300 hover:text-red-600 transition-colors"
                 >
-                  <Trash2 className="h-4 w-4" />
+                  <Trash2 className="h-6 w-6" />
                 </button>
               </div>
             </div>
@@ -168,17 +181,17 @@ const Cart: React.FC<CartProps> = ({
         ))}
       </div>
 
-      <div className="bg-white rounded-xl shadow-sm p-6">
-        <div className="flex items-center justify-between text-2xl font-noto font-semibold text-black mb-6">
-          <span>Total:</span>
-          <span>₱{(getTotalPrice() || 0).toFixed(2)}</span>
+      <div className="bg-secondary p-12 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="text-white">
+          <p className="text-xs font-black uppercase tracking-[0.4em] opacity-50 mb-2">Total Rental Investment</p>
+          <p className="text-6xl font-black">₱{(getTotalPrice() || 0).toLocaleString()}</p>
         </div>
-        
+
         <button
           onClick={onCheckout}
-          className="w-full bg-red-600 text-white py-4 rounded-xl hover:bg-red-700 transition-all duration-200 transform hover:scale-[1.02] font-medium text-lg"
+          className="w-full md:w-auto bg-primary text-white px-16 py-6 font-black text-lg uppercase tracking-[0.2em] hover:bg-white hover:text-secondary transition-all duration-500 shadow-2xl"
         >
-          Proceed to Checkout
+          Confirm Reservation
         </button>
       </div>
     </div>

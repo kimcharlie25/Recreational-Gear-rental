@@ -17,86 +17,79 @@ const Header: React.FC<HeaderProps> = ({ cartItemsCount, onCartClick, onMenuClic
   const { categories, loading: categoriesLoading } = useCategories();
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-red-200 shadow-sm">
+    <header className="sticky top-0 z-50 bg-white border-b border-primary/20 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <button 
+        <div className="flex items-center justify-between h-20">
+          <button
             onClick={onMenuClick}
-            className="flex items-center space-x-2 text-black hover:text-red-600 transition-colors duration-200"
+            className="flex items-center space-x-3 text-secondary hover:text-primary transition-all duration-300"
           >
             {loading ? (
-              <div className="w-10 h-10 bg-gray-200 rounded-full animate-pulse" />
+              <div className="w-12 h-12 bg-gray-100 rounded-full animate-pulse" />
             ) : (
-              <img 
-                src={siteSettings?.site_logo || "/logo.jpg"} 
+              <img
+                src={siteSettings?.site_logo || "/logo.jpg"}
                 alt={siteSettings?.site_name || "Beracah Cafe"}
-                className="w-10 h-10 rounded-full object-cover"
+                className="w-12 h-12 rounded-full object-cover border-2 border-primary"
                 onError={(e) => {
                   e.currentTarget.src = "/logo.jpg";
                 }}
               />
             )}
-            <h1 className="text-2xl font-noto font-semibold">
+            <h1 className="text-2xl font-bold tracking-tight">
               {loading ? (
-                <div className="w-24 h-6 bg-gray-200 rounded animate-pulse" />
+                <div className="w-32 h-7 bg-gray-100 rounded animate-pulse" />
               ) : (
                 siteSettings?.site_name || "Beracah Cafe"
               )}
             </h1>
           </button>
-          
-          <nav className="hidden md:flex items-center space-x-8">
-            {categoriesLoading ? (
-              <div className="flex space-x-8">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="w-16 h-4 bg-gray-200 rounded animate-pulse" />
-                ))}
-              </div>
-            ) : (
-              <>
-                <button
-                  onClick={() => onCategoryClick?.('all')}
-                  className={`transition-colors duration-200 ${
-                    selectedCategory === 'all' || !selectedCategory
-                      ? 'text-red-600 font-medium'
-                      : 'text-gray-700 hover:text-red-600'
-                  }`}
-                >
-                  All
-                </button>
-                {categories.map((category) => (
-                  <button
-                    key={category.id}
-                    onClick={() => onCategoryClick?.(category.id)}
-                    className={`flex items-center space-x-1 transition-colors duration-200 ${
-                      selectedCategory === category.id
-                        ? 'text-red-600 font-medium'
-                        : 'text-gray-700 hover:text-red-600'
-                    }`}
-                  >
-                    <span>{category.icon}</span>
-                    <span>{category.name}</span>
-                  </button>
-                ))}
-              </>
-            )}
-          </nav>
 
-          <div className="flex items-center space-x-2">
-            <button 
-              onClick={onOrderTrackingClick}
-              className="flex items-center gap-2 px-3 py-2 text-gray-700 hover:text-black hover:bg-gray-100 rounded-lg transition-all duration-200 text-sm font-medium"
-            >
-              <Package className="h-5 w-5" />
-              <span className="hidden sm:inline">Track Order</span>
-            </button>
-            <button 
+          <div className="flex-1 overflow-x-auto mx-8 scrollbar-hide">
+            <nav className="hidden md:flex items-center space-x-10">
+              {categoriesLoading ? (
+                <div className="flex space-x-8">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div key={i} className="w-20 h-5 bg-gray-100 rounded animate-pulse" />
+                  ))}
+                </div>
+              ) : (
+                <>
+                  <button
+                    onClick={() => onCategoryClick?.('all')}
+                    className={`transition-all duration-300 whitespace-nowrap text-xs uppercase tracking-widest font-black ${selectedCategory === 'all' || !selectedCategory
+                      ? 'text-primary border-b-2 border-primary'
+                      : 'text-gray-900 border-b-2 border-transparent hover:text-primary'
+                      }`}
+                  >
+                    All
+                  </button>
+                  {categories.map((category) => (
+                    <button
+                      key={category.id}
+                      onClick={() => onCategoryClick?.(category.id)}
+                      className={`flex items-center space-x-2 transition-all duration-300 whitespace-nowrap text-xs uppercase tracking-widest font-black border-b-2 ${selectedCategory === category.id
+                        ? 'text-primary border-primary'
+                        : 'text-gray-900 border-transparent hover:text-primary'
+                        }`}
+                    >
+                      <span className="text-lg">{category.icon}</span>
+                      <span>{category.name}</span>
+                    </button>
+                  ))}
+                </>
+              )}
+            </nav>
+          </div>
+
+          <div className="flex items-center space-x-4">
+            <button
               onClick={onCartClick}
-              className="relative p-2 text-gray-700 hover:text-black hover:bg-yellow-100 rounded-full transition-all duration-200"
+              className="relative p-2.5 text-secondary hover:text-primary hover:bg-primary/5 rounded-full transition-all duration-300"
             >
-              <ShoppingCart className="h-6 w-6" />
+              <ShoppingCart className="h-7 w-7" />
               {cartItemsCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center animate-bounce-gentle">
+                <span className="absolute top-0 right-0 bg-primary text-white text-[10px] font-bold rounded-full h-5 w-5 flex items-center justify-center ring-2 ring-white animate-bounce-gentle">
                   {cartItemsCount}
                 </span>
               )}

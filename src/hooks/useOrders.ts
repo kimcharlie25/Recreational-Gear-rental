@@ -16,6 +16,8 @@ export interface CreateOrderPayload {
   total: number;
   items: CartItem[];
   receiptUrl?: string;
+  renterIdUrl?: string;
+  rentalStartDate?: string;
 }
 
 export interface OrderWithItems {
@@ -34,10 +36,13 @@ export interface OrderWithItems {
   status: string;
   created_at: string;
   receipt_url: string | null;
+  renter_id_url: string | null;
+  rental_start_date: string | null;
   order_items: {
     id: string;
     item_id: string;
     name: string;
+    description: string | null;
     variation: any | null;
     add_ons: any | null;
     unit_price: number;
@@ -150,6 +155,8 @@ export const useOrders = () => {
           total: payload.total,
           ip_address: clientIp ?? null,
           receipt_url: payload.receiptUrl ?? null,
+          renter_id_url: payload.renterIdUrl ?? null,
+          rental_start_date: payload.rentalStartDate ?? null,
         })
         .select()
         .single();
@@ -161,6 +168,7 @@ export const useOrders = () => {
         order_id: order.id,
         item_id: ci.menuItemId || ci.id,
         name: ci.name,
+        description: ci.description || null,
         variation: ci.selectedVariation
           ? { id: ci.selectedVariation.id, name: ci.selectedVariation.name, price: ci.selectedVariation.price }
           : null,
@@ -241,13 +249,13 @@ export const useOrders = () => {
     return () => { cancelled = true; };
   }, [clientIp]);
 
-  return { 
-    createOrder, 
-    creating, 
-    error, 
-    orders, 
-    loading, 
-    fetchOrders, 
-    updateOrderStatus 
+  return {
+    createOrder,
+    creating,
+    error,
+    orders,
+    loading,
+    fetchOrders,
+    updateOrderStatus
   };
 };
