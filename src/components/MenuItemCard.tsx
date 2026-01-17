@@ -108,12 +108,12 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
     <>
       <div className={`bg-white rounded-none shadow-none hover:shadow-2xl transition-all duration-500 overflow-hidden group border border-secondary/10 ${!item.available ? 'opacity-50' : ''}`}>
         {/* Image Container with Badges */}
-        <div className="relative h-[28rem] bg-gray-50 overflow-hidden">
+        <div className="relative h-[25rem] bg-gray-50 overflow-hidden">
           {item.image ? (
             <img
               src={item.image}
               alt={item.name}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
               loading="lazy"
               decoding="async"
               onError={(e) => {
